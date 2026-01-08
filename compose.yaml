@@ -1,0 +1,16 @@
+services:
+  watchtower:
+    image: containrrr/watchtower
+    environment:
+      -  WATCHTOWER_POLL_INTERVAL=60
+      -  WATCHTOWER_LABEL_ENABLE=1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    container_name: watchtower
+  express:
+    image: veetimar/express
+    ports:
+      - 8080:8080
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    container_name: express
